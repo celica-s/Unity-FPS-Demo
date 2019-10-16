@@ -8,6 +8,7 @@ public class WanderingState : EnemyState {
             enemy.ChangeState (new DieState ());
             // return;
         }
+        
         enemy.transform.Translate (0, 0, EnemyConst.speed * Time.deltaTime);
 
         Ray ray = new Ray (enemy.transform.position, enemy.transform.forward);

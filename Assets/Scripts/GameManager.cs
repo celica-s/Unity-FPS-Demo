@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneController : MonoBehaviour {
+public class GameManager : MonoBehaviour {
 #pragma warning disable 0649
     [SerializeField]
     private GameObject enemyPrefab;
@@ -11,8 +11,7 @@ public class SceneController : MonoBehaviour {
 #pragma warning restore 0649
     private GameObject _enemy;
 
-    // Update is called once per frame
-    void Update () {
+    void Start () {
         if (_enemy == null) {
             for (int i = 0; i < number; i++) {
                 _enemy = Instantiate (enemyPrefab) as GameObject;

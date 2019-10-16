@@ -43,14 +43,4 @@ public class RayShooter : MonoBehaviour {
 
         GUI.Label (new Rect (posX, poxY, size, size), "*", style);
     }
-
-    private IEnumerator SphereIndicator (Vector3 pos) {
-        GameObject sphere = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-
-        sphere.transform.position = pos;
-
-        yield return new WaitForSeconds (1);
-
-        Destroy (sphere);
-    }
 }

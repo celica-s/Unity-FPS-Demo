@@ -12,7 +12,6 @@ public class AttackingState : EnemyState {
     public override void Excute (Enemy enemy) {
         if (!enemy.alive) {
             enemy.ChangeState (new DieState ());
-            // return;
         }
 
         enemy.enemyCharacter.Fire ();

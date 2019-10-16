@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCharacter : MonoBehaviour {
-    #pragma warning disable 0649
+#pragma warning disable 0649
     [SerializeField]
     private GameObject fireBallPrefab;
-    #pragma warning restore 0649
+#pragma warning restore 0649
     private GameObject _fireBall;
     public void ReactToHit () {
         Enemy ai = GetComponent<Enemy> ();
@@ -14,14 +14,15 @@ public class EnemyCharacter : MonoBehaviour {
             ai.alive = false;
         }
 
-        StartCoroutine (Die ());
+        Destroy (gameObject);
+        // StartCoroutine (Die ());
     }
 
     private IEnumerator Die () {
-        Vector3 movement = new Vector3(-90,0,0);
-        movement = transform.TransformDirection(movement);
-        Quaternion rotation = Quaternion.LookRotation(movement);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 15 * Time.deltaTime);
+        Vector3 movement = new Vector3 (-90, 0, 0);
+        movement = transform.TransformDirection (movement);
+        Quaternion rotation = Quaternion.LookRotation (movement);
+        transform.rotation = Quaternion.Lerp (transform.rotation, rotation, 15 * Time.deltaTime);
 
         yield return new WaitForSeconds (1.5f);
 

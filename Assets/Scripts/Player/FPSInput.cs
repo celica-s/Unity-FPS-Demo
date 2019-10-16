@@ -1,30 +1,34 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
-// basic WASD-style movement control
-// commented out line demonstrates that transform.Translate instead of charController.Move doesn't have collision detection
-
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent (typeof (CharacterController))]
 public class FPSInput : MonoBehaviour {
 	public float speed = 6.0f;
-	public float gravity = -9.8f;
 
 	private CharacterController _charController;
-	
-	void Start() {
-		_charController = GetComponent<CharacterController>();
-	}
-	
-	void Update() {
-		float deltaX = Input.GetAxis("Horizontal") * speed;
-		float deltaZ = Input.GetAxis("Vertical") * speed;
-		Vector3 movement = new Vector3(deltaX, 0, deltaZ);
-		movement = Vector3.ClampMagnitude(movement, speed);
+	private float _vertSpeed;
 
-		movement.y = gravity;
+	void Start () {
+		_charController = GetComponent<CharacterController> ();
+		_vertSpeed = PlayerConst.minFall;
+	}
+
+	void Update () {
+		float deltaX = Input.GetAxis ("Horizontal") * speed;
+		float deltaZ = Input.GetAxis ("Vertical") * speed;
+		Vector3 movement = new Vector3 (deltaX, 0, deltaZ);
+		movement = Vector3.ClampMagnitude (movement, speed);
+
+		movement.y = _vertSpeed;
 
 		movement *= Time.deltaTime;
-		movement = transform.TransformDirection(movement);
-		_charController.Move(movement);
+		movement = transform.TransformDirection (movement);
+
+		_charController.Move (movement);
+
+		if (Input.GetButton ("Horizontal") || Input.GetButton ("Vertical"))
+			Time.timeScale = 1;
+		else
+			Time.timeScale = 0.1f;
 	}
 }

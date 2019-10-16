@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCharacter : MonoBehaviour
-{
+public class PlayerCharacter : MonoBehaviour {
     private int _health;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start () {
         _health = 5;
     }
 
-    public void Hurt(int damage) {
+    public void Hurt (int damage) {
         _health -= damage;
+        if (_health <= 0) {
+            Debug.Log (_health);
+            die ();
+        }
+
+    }
+
+    private void die () {
+        Destroy (gameObject);
     }
 }
